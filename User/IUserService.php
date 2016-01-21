@@ -1,5 +1,8 @@
 <?php
 
+namespace PhaleDemo\User;
+
+
 interface IUserService {
 
     /**
