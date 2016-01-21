@@ -1,44 +1,14 @@
 <?php
 
+require('bower_components/Dephendency/index.php');
+
 use Phale\App;
-use Phale\Module;
 use Phale\Request;
 use Phale\Response;
 
+require_once('user/api.php');
 
-$user = new Module('user');
-
-$user->get('', ['userService'], function(Request $request, Response $response, $id, IUserService $userService){
-
-});
-
-$user->put('', ['userService'], function(Request $request, Response $response, $id, IUserService $userService){
-
-});
-
-$user->delete('', ['userService'], function(Request $request, Response $response, $id, IUserService $userService){
-
-});
-
-
-$users = new Module('users');
-
-$users->factory('userService', ['database'], function(IDatabase $database){
-    return new UserService($database);
-});
-
-$users->get('', ['userService'], function(Request $request, Response $response, IUserService $userService){
-
-});
-
-$users->post('', ['userService'], function(Request $request, Response $response, IUserService $userService){
-
-});
-
-$users->module('/:id', $user);
-
-
-$app = new App('demo');
+$app = new App('demo', '/PhaleDemo');
 
 $app->factory('config', [], function(){
     return json_decode(file_get_contents('config.json'));
@@ -55,10 +25,13 @@ $app->factory('database', ['config'], function(Config $config){
     );
 });
 
-$app->get('', [], function(Request $request, Response $response){
+$app->get('/', [], function(Request $request, Response $response){
 
 });
 
 $app->module('/user', $users);
 
-$app->run();
+$request = Request::fromHttp($_SERVER);
+$response = Response::fromHttp();
+
+$app->run($request, $response);

@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "Phale": "phale#~0.1.0"
+    "Phale": "phale#~0.1.2"
   }
 }
