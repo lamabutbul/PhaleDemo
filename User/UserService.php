@@ -23,6 +23,7 @@ class UserService implements IUserService {
     /**
      * @param int $id
      * @return User
+     * @throws UserNotFoundException
      */
     public function find($id) {
         // TODO: Implement find() method.
