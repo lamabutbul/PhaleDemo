@@ -3,14 +3,20 @@
 use Phale\Module;
 use Phale\Request;
 use Phale\Response;
+use PhaleDemo\Database;
 use PhaleDemo\User\IUserService;
 use PhaleDemo\User\UserService;
-use PhaleDemo\Database;
+use PhaleDemo\User\UserNotFoundException;
 
 $user = new Module('user');
 
 $user->get('', ['userService'], function(Request $request, Response $response, $id, IUserService $userService){
-
+    try {
+        $response->json($userService->find($id));
+    }
+    catch (UserNotFoundException $e) {
+        $response->status = 404;
+    }
 });
 
 $user->put('', ['userService'], function(Request $request, Response $response, $id, IUserService $userService){

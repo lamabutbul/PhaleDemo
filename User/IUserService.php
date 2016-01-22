@@ -13,6 +13,7 @@ interface IUserService {
 
     /**
      * @return User[]
+     * @throws UserNotFoundException
      */
     public function findAll();
 

@@ -60,6 +60,7 @@ class Database {
         $this->port = $port;
         $this->charset = $charset;
         $this->db = new PDO(sprintf('mysql:host=%s;port=%s;dbname=%s;charset=UTF8', $this->host, $this->port, $this->database), $this->username, $this->password, [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"]);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**

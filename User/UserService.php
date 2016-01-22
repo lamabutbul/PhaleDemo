@@ -26,6 +26,11 @@ class UserService implements IUserService {
      */
     public function find($id) {
         // TODO: Implement find() method.
+        $user = $this->db->select(['*'])->from('user')->where([['id', '=', $id], 'AND', ['deleted', '=', 0]])->exec()->first('\PhaleDemo\User\User');
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+        return $user;
     }
 
     /**
